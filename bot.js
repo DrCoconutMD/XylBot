@@ -3,6 +3,7 @@ const logger = require('winston');
 const auth = require('./auth.json');
 
 const dice = require('./dice/dice');
+const silly = require('./silly/silly');
 
 logger.remove(logger.transports.Console);
 logger.add(new logger.transports.Console, { colorize: true });
@@ -27,16 +28,20 @@ mafbot.on('message', async (user, userId, channelId, message, evt) => {
 	args = args.splice(1);
 	switch(cmd) {
 		case 'ping':
-			mafbot.sendMessage({
-				to: channelId,
-				message: 'PONGOGONG'
-			});
+			sendMessage('PONGOGONG');
 			break;
 		case 'roll':
-			mafbot.sendMessage({
-				to: channelId,
-				message: await dice.roll(args)
-			});
+			sendMessage(channelId, dice.roll(args));
+			break;
+		case 'slap':
+			sendMessage(channelId, silly.slap(args));
 			break;
 	}
 });
+
+const sendMessage = (channelId, message) => {
+	mafbot.sendMessage({
+		to: channelId,
+		message: message
+	});
+};
