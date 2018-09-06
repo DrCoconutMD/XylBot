@@ -1,7 +1,7 @@
 {
     "t": {
         "name": "Townie",
-        "roletext": "You win when all the bad guys are gone.",
+        "roletext": "",
         "actions": [],
         "status": {
             "evolveto": "c,d,v,rb",
