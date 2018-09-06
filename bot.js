@@ -28,7 +28,7 @@ mafbot.on('message', async (user, userId, channelId, message, evt) => {
 	args = args.splice(1);
 	switch(cmd) {
 		case 'ping':
-			sendMessage('PONGOGONG');
+			sendMessage(channelId, 'PONGOGONG');
 			break;
 		case 'roll':
 			sendMessage(channelId, dice.roll(args));

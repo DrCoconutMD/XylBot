@@ -1,0 +1,78 @@
+{
+    "t": {
+        "name": "Townie",
+        "roletext": "You win when all the bad guys are gone.",
+        "actions": [],
+        "status": {
+            "evolveto": "c,d,v,rb",
+            "teamaltrolemafia": "m",
+            "teamaltrolesurvivor": "sv",
+            "teamaltrolesk": "sk"
+        },
+        "setup": "town/basic",
+        "countas": "t",
+        "rarity": 1,
+        "unlimited": true
+    },
+    "c": {
+        "name": "Cop",
+        "roletext": "You can inspect another player to learn their alignment. Your results are not guaranteed to be accurate.",
+        "actions" : ["inspect"],
+        "status": {
+            "weapon": "gun",
+            "evolveto": "f,stalk"
+        },
+        "setup": "town/basic/power,mafia-ally",
+        "minplayers": 4,
+        "countas": "c",
+        "changeto": "cbackup",
+        "rarity": 1,
+        "power": 1
+    },
+    "d": {
+        "name": "Doctor",
+        "roletext": "You can protect other players from kills. Each protection stops one kill, and lasts for one night.",
+        "actions" : ["protect"],
+        "status": {
+            "evolveto": "drev,cmed",
+            "tagnoday": "*"
+        },
+        "setup": "town/basic/power,mafia/power,mafia-ally",
+        "minteam": 2,
+        "minplayers": 4,
+        "minscum": 1,
+        "countas": "d",
+        "changeto": "dbackup",
+        "rarity": 1,
+        "power": 0.5
+    },
+    "v": {
+        "name": "Vigilante",
+        "roletext": "You can kill other players.",
+        "actions" : ["kill"],
+        "status": {
+            "weapon": "gun",
+            "evolveto": "vik,merc"
+        },
+        "setup": "town/basic/power",
+        "minplayers": 4,
+        "countas": "v",
+        "rarity": 1,
+        "power": 0.5
+    },
+    "rb": {
+        "name": "Roleblocker",
+        "roletext": "You can block another player's action each night. You are immune to roleblocks.",
+        "actions" : ["block"],
+        "status": {
+            "immuneblock": "*",
+            "evolveto": "dis,red",
+            "tagnoday": "*"
+        },
+        "setup": "town/basic/power,mafia/basic/power,mafia-ally",
+        "minplayers": 4,
+        "countas": "rb",
+        "rarity": 1,
+        "power": 0.55
+    }
+}
