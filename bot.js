@@ -35,7 +35,7 @@ mafbot.on('message', async (user, userId, channelId, message, evt) => {
 		case 'roll':
 			mafbot.sendMessage({
 				to: channelId,
-				message: await dice.roll(args[0])
+				message: await dice.roll(args)
 			});
 			break;
 	}
