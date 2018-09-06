@@ -1,7 +1,8 @@
 
 const logger = require('winston');
 
-module.exports.roll = async arg => {
+module.exports.roll = async args => {
+    const arg = args[0];
     if (!arg) {
         arg = `1d6`;
     }
