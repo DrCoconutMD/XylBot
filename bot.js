@@ -18,7 +18,7 @@ mafbot.on('ready', evt => {
 	logger.info(`Logged in as: ${mafbot.username} - (${mafbot.id})`);
 });
 
-mafbot.on('message', (user, userId, channelId, message, evt) => {
+mafbot.on('message', async (user, userId, channelId, message, evt) => {
 	if (message.substring(0,1) !== '!') {
 		return;
 	}
@@ -35,7 +35,7 @@ mafbot.on('message', (user, userId, channelId, message, evt) => {
 		case 'roll':
 			mafbot.sendMessage({
 				to: channelId,
-				message: dice.roll(args[0])
+				message: await dice.roll(args[0])
 			});
 			break;
 	}

@@ -1,10 +1,14 @@
-module.exports.roll = async arg => {
-    const dice = deduceDice(arg);
-    let numberOfDice;
-    let sidesOfDice;
 
-    if (!dice[0]) numberOfDice = 1;
-    if (!dice[1]) sidesOfDice = 6;
+const logger = require('winston');
+
+module.exports.roll = async arg => {
+    if (!arg) {
+        arg = `1d6`;
+    }
+    const dice = deduceDice(arg);
+
+    const numberOfDice = dice[0] ? dice[0] : 1;
+    const sidesOfDice = dice[1] ? dice[1] : 6;
 
     const rolledDice = [];
     for (let i = 0; i < numberOfDice; i++) {
