@@ -1,0 +1,64 @@
+{
+    "town": {
+        "wintext": "You win when all the bad guys are gone.",
+        "actions": []
+    },
+    "town-ally": {
+        "wintext": "You win if the town wins.",
+		"actions": [],
+		"nonteam": true
+    },
+    "mafia": {
+        "wintext": "You win when you have majority and there are no other killers.",
+        "actions": ["mafiakill"],
+        "openteam": true,
+        "weapon": "gun"
+    },
+    "mafia-ally": {
+        "wintext": "You win if the Mafia wins.",
+        "actions": [],
+        "nonteam": true
+    },
+    "wolf": {
+        "wintext": "You win when you have majority and there are no other killers.",
+        "actions": [],
+        "openteam": true
+    },
+    "survivor": {
+        "wintext": "You win if you are alive at the end of the game.",
+        "actions": [],
+        "nonteam": true
+    },
+    "sk": {
+        "wintext": "You win when you are in the final two and there are no other killers.",
+        "actions": []
+    },
+    "cult": {
+        "wintext": "You win when you have majority and there are no other killers.",
+        "actions": [],
+        "openteam": true
+    },
+    "mason": {
+        "actions": [],
+        "openteam": true
+    },
+    "sibling": {
+        "actions": [],
+        "openteam": true,
+        "sibling": true
+    },
+    "lyncher": {
+        "wintext": "You win if your target is lynched.",
+        "actions": []
+    },
+    "jester": {
+        "wintext": "You win if you are lynched.",
+        "actions": [],
+        "nonteam": true
+    },
+    "assassin": {
+        "wintext": "",
+        "actions": [],
+        "openteam": true
+    }
+}
