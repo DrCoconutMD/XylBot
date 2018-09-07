@@ -20,6 +20,9 @@ mafbot.on('ready', evt => {
 });
 
 mafbot.on('message', async (user, userId, channelId, message, evt) => {
+	if (channelId !== '487080224320782336') {
+		return;
+	}
 	if (message.substring(0,1) !== '!') {
 		return;
 	}
