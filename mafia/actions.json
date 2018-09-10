@@ -1,0 +1,908 @@
+{
+	"copy": {
+		"priority": 101,
+		"targets": ["alive,nonself", "alive"],
+		"resolvedelay": "redirect",
+		"status": "copy",
+		"realtargets": true,
+		"help": "copy [player] [newtarget]: Copies a player's night ability and chooses a new target. The ability will work as if you had used it yourself."
+	},
+	"release": {
+		"priority": 102,
+		"targets": [],
+		"resolvedelay": "immediate",
+		"help": "release: All actions you have delayed take effect."
+	},
+	"cancel": {
+		"priority": 103,
+		"targets": [],
+		"resolvedelay": "immediate",
+		"help": "cancel: Actions you have delayed are forgotten and never take effect."
+	},
+	"makehidden": {
+		"priority": 105,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "shield",
+		"help": "makehidden [player]: Makes another player untargetable for one night."
+	},
+	"hide": {
+		"alias": "makehidden #S",
+		"targets": [],
+		"type": "nonkill,locked,noimmune",
+		"help": "hide: Makes yourself untargetable for one night."
+	},
+	"shield": {
+		"alias": "makehidden",
+		"targets": ["alive,nonself"]
+	},
+	"superbus": {
+		"priority": 106,
+		"targets": ["alive,nonself,unique", "alive,nonself,unique"],
+		"type": "super",
+		"resolvedelay": "shield",
+		"checkalive": "target"
+	},
+	"bus": {
+		"priority": 107,
+		"targets": ["alive,nonself,unique", "alive,nonself,unique"],
+		"resolvedelay": "shield",
+		"checkalive": "target",
+		"help": "bus [player1] [player2]: All actions this phase that would affect one target affect the other instead."
+	},
+	"reflectshield": {
+		"priority": 108,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "shield",
+		"type": "nonkill,noreflect",
+		"help": "reflectshield [player]: Gives a player a reflection shield for the night. Any other night action targeting that player will bounce back on the player using it."
+	},
+	"timedsetstatus": {
+		"priority": 108.5,
+		"targets": ["alive,nonself"],
+		"status": "timedset",
+		"resolvedelay": "shield",
+		"type": "super",
+		"help": "timedsetstatus [player]: Sets a status on another player. The exact effects are role-dependent. This is not intended as a player-usable action."
+	},
+	"setstatus": {
+		"priority": 109,
+		"targets": ["alive,nonself"],
+		"status": "set",
+		"resolvedelay": "shield",
+		"type": "super",
+		"help": "setstatus [player]: Sets a status on another player. The exact effects are role-dependent. This is not intended as a player-usable action."
+	},
+	"increasestatus": {
+		"priority": 109.5,
+		"targets": ["alive,nonself"],
+		"status": "increase",
+		"resolvedelay": "shield",
+		"type": "super",
+		"help": "increasestatus [player]: Sets a status on another player. The exact effects are role-dependent. This is not intended as a player-usable action."
+	},
+	"trigger": { 
+		"priority": 109.5,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "immediate",
+		"help": "trigger [player]: Does something depending on the target's role."
+	},
+	"delay": {
+		"priority": 110,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "normal",
+		"help": "delay [player]: Delays a player's actions until the next night. Your target is not told they are blocked."
+	},
+	"block": {
+		"priority": 111,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "normal",
+		"help": "block [player]: Roleblocks a player, preventing them from using their night abilities."
+	},
+	"randomize": {
+		"priority": 112,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "redirect",
+		"realtargets": true,
+		"help": "randomize [player]: Changes the target of another player's night action to a target selected at random."
+	},
+	"chaos": {
+		"priority": 112,
+		"targets": [],
+		"type": "super",
+		"help": "chaos: Night actions have a 50% chance of affecting a random target."
+	},
+	"redirectkill": {
+		"priority": 113,
+		"targets": ["alive,nonself", "alive"],
+		"resolvedelay": "redirect",
+		"realtargets": true,
+		"help": "redirectkill [player] [newtarget]: Changes the target of another player's kill action to a target of your choice. Nonkill actions are unaffected."
+	},
+	"redirect": {
+		"priority": 114,
+		"targets": ["alive,nonself", "alive"],
+		"resolvedelay": "redirect",
+		"realtargets": true,
+		"help": "redirect [player] [newtarget]: Changes the target of another player's night action to a target of your choice."
+	},	
+	"protect": {
+		"priority": 201,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "shield",
+		"help": "protect [player]: Gives another player immunity to a single kill action for that night."
+	},
+	"superprotect": {
+		"priority": 202,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "shield",
+		"type": "super",
+		"help": "superprotect [player]: Gives another player total immunity to kill abilities this night. This even affects roles that are immune to normal protection."
+	},
+	"guard": {
+		"priority": 203,
+		"targets": ["alive,nonself"],
+		"resolvedelay": "shield",
+		"status": "guard",
+		"help": "guard [player]: Guard another player against attacks. If they would be killed, you and/or the attacker will be killed instead."
+	},
+	"message": {
+		"priority": 250,
+		"targets": ["alive"],
+		"status": "message",
+		"help": "message [player]: Sends a specific message to another player. This is normally used as part of theme roles."
+	},
+	"announce": {
+		"priority": 250.5,
+		"targets": ["alive"],
+		"status": "announce",
+		"help": "announce [player]: Makes an announcement. This is normally used as part of theme roles."
+	},
+	"clearphaseaction": {
+		"priority": 251,
+		"targets": [],
+		"help": "clearphaseaction: Lets you use a second action this phase."
+	},
+	"morph": {
+		"priority": 302,
+		"targets": ["alive,nonself"],
+		"status": "morphstatus",
+		"checkalive": "player",
+		"help": "morph [player]: Turns you into a perfect copy of another player except for your win condition. You retain this ability."
+	},
+	"channel": {
+		"alias": "morph",
+		"targets": ["dead,nonself"],
+		"status": "morphstatus",
+		"checkalive": "player",
+		"help": "channel [player]: Turns you into a perfect copy of a dead player except for your win condition. You retain this ability."
+	},
+	"transform": {
+		"priority": 303,
+		"targets": [],
+		"status": "transform",
+		"help": "transform: You get a new role. The role you get depends on your current role."
+	},
+	"transform2": {
+		"priority": 304,
+		"targets": ["alive,nonself"],
+		"status": "transform",
+		"help": "transform2 [player]: You get a new role. The role you get depends on your current role."
+	},
+	"buddy": {
+		"priority": 305,
+		"targets": ["alive,nonself"],
+		"help": "buddy [player]: Your buddy becomes the chosen player."
+	},
+	"setbuddy": {
+		"priority": 306,
+		"targets": ["alive,nonself", "alive"],
+		"help": "setbuddy [player] [buddy]: Sets another player's buddy. This is not intended as a player-usable action."
+	},
+	"giveability": {
+		"priority": 401,
+		"targets": ["alive,nonself"],
+		"status": "give",
+		"checkalive": "target",
+		"help": "giveability [player]: Gives an ability chosen at random to another player. You learn what ability was given."
+	},
+	"gift": {
+		"alias": "giveability",
+		"targets": ["alive,nonself"]
+	},
+	"copyabilityto": {
+		"priority": 402,
+		"targets": ["alive,nonself", "alive"],
+		"status": "copyuses",
+		"help": "copyabilityto [player] [recipient: Gives a player the ability used by another player that night."
+	},
+	"copyability": {
+		"alias": "copyabilityto #1 #S",
+		"targets": ["alive,nonself"],
+		"help": "copyability [player]: Gives you the ability used by a player that night."
+	},
+	"steal": {
+		"priority": 403,
+		"targets": ["alive,nonself"],
+		"status": "stealuses",
+		"checkalive": "target",
+		"help": "steal [player]: Steals a random ability from another player. The theft is permanent. (Group abilities can't be stolen)."
+	},
+	"stealdead": {
+		"priority": 404,
+		"targets": ["dead,nonself"],
+		"status": "stealuses",
+		"help": "stealdead [player]: Steals a random ability from a dead player. The theft is permanent. (Group abilities can't be stolen)."
+	},
+	"stealitem": {
+		"priority": 403,
+		"targets": ["alive,nonself"],
+		"help": "stealitem [player]: Steals a random item from another playe. The theft is permanent."
+	},
+	"swap": {
+		"priority": 405,
+		"targets": ["alive,nonself,unique", "alive,nonself,unique"],
+		"help": "swap [player1] [player2]: Swaps two players' roles, but not teams. The swap is permanent."
+	},
+	"psych": {
+		"priority": 406,
+		"targets": ["alive,nonself"],
+		"status": "convert",
+		"checkalive": "target",
+		"help": "psych [player]: If the target is a Serial Killer, converts them into a normal Townie."
+	},
+	"curse": {
+		"priority": 407,
+		"targets": ["alive,nonself"],
+		"status": "curse",
+		"checkalive": "target",
+		"help": "curse [player]: Inflict a curse on another player."
+	},
+	"mark": {
+		"priority": 408,
+		"targets": ["alive,nonself"],
+		"help": "mark [player]: Sets a temporary mark on a player."
+	},
+	"unmark": {
+		"priority": 409,
+		"targets": ["alive,nonself"],
+		"help": "unmark [player]: Clears a temporary mark on a player."
+	},
+	"subvote": {
+		"priority": 500,
+		"targets": ["alive,nonself"],
+		"checkalive": "target",
+		"help": "subvote [player]: Takes away a player's vote the next day."
+	},
+	"addvote": {
+		"priority": 501,
+		"targets": ["alive,nonself"],
+		"checkalive": "target",
+		"help": "addvote [player]: Gives a player an extra vote the next day."
+	},
+	"motivate": {
+		"alias": "addvote",
+		"targets": ["alive,nonself"]
+	},
+	"proclaim": {
+		"priority": 501,
+		"targets": ["alive,nonself"],
+		"checkalive": "target",
+		"help": "proclaim [player]: Gives a player an extra vote for the day. The player selected is announced publically."
+	},
+	"timedproclaim": {
+		"priority": 501,
+		"targets": ["alive,nonself"],
+		"checkalive": "target"
+	},	
+	"voteblock": {
+		"alias": "subvote #1",
+		"targets": ["alive,nonself"]
+	},
+	"forcevote": {
+		"priority": 504,
+		"targets": ["alive,nonself", "alive,nolynch"],
+		"checkalive": "target",
+		"help": "forcevote [player] [votee]: Forces a player to vote as you wish. The target player cannot change their vote for the rest of the day."
+	},
+	"command": {
+		"alias": "forcevote",
+		"targets": ["alive,nonself", "alive,nolynch"]
+	},
+	"poison": {
+		"priority": 601,
+		"targets": ["alive,nonself"],
+		"is_kill": true,
+		"status": "poisontime",
+		"help": "poison [player]: Gives a player slow-action poison which will kill them later. Even players immune to normal kills can be killed by poison."
+	},
+	"disablebase": {
+		"priority": 602,
+		"targets": ["alive,nonself"],
+		"status": "disabletime",
+		"help": "disablebase [player]: Temporarily removes all of a player's abilities and characteristics."
+	},
+	"timeddisable": {
+		"priority": 602.1,
+		"targets": ["alive,nonself"],
+		"status": "disabletime",
+		"help": "timeddisable [player]: Temporarily removes all of a player's abilities and characteristics."
+	},
+	"winonlynch": {
+		"priority": 603,
+		"targets": ["alive,nonself"],
+		"help": "winonlynch [player]: You win if the target is lynched this turn."
+	},
+	"prime": {
+		"priority": 604,
+		"targets": ["alive,nonself"],
+		"help": "prime [player]: Douses a player in gasoline, killing them when the ignite action is used."
+	},
+	"stun": {
+		"priority": 605,
+		"targets": ["alive,nonself"],
+		"help": "stun [player]: The next action with timed recharge the target takes has its recharge time doubled."
+	},
+	"antidote": {
+		"priority": 701,
+		"targets": ["alive,nonself"],
+		"help": "antidote [player]: Cures a player who has been poisoned. You can't cure yourself."
+	},
+	"defuse": {
+		"priority": 702,
+		"targets": ["alive,nonself"],
+		"checkalive": "player,target",
+		"help": "defuse [player]: Defuses a timebomb on another player. Defusing takes a short amount of time."
+	},
+	"friend": {
+		"priority": 801,
+		"targets": ["alive,nonself"],
+		"help": "friend [player]: Sends a player a message that tells them which team you are on."
+	},
+	"pardon": {
+		"priority": 802,
+		"targets": ["alive,nonself"],
+		"help": "pardon [player]: If the chosen player is lynched today, they will return to life."
+	},
+	"reload": {
+		"priority": 803,
+		"targets": [],
+		"help": "reload: Gives you full charges of all limited-use abilities."
+	},
+	"charge": {
+		"priority": 804,
+		"targets": [],
+		"status": "charge",
+		"help": "charge: Increase the damage of your next attack."
+	},
+	"safeclaim": {
+		"priority": 805,
+		"targets": [],
+		"free": true,
+		"help": "safeclaim: Gives you a safe claim."
+	},
+	"suicide": {
+		"priority": 901,
+		"targets": [],
+		"checkalive": "player",
+		"help": "suicide: Kills you. Why would you want to do that?"
+	},
+	"suicidebomb": {
+		"priority": 902,
+		"targets": ["alive,nonself"],
+		"type": "kill",
+		"is_kill": true,
+		"checkalive": "player",
+		"help": "suicidebomb [player]: Kills another player and yourself. If the player is immune to kills, only you will die."
+	},
+	"possess": {
+		"priority": 905,
+		"targets": ["alive,nonself"],
+		"checkalive": "target",
+		"help": "possess [player]: You die, but the target joins your team and gains this ability."
+	},
+	"decult": {
+		"priority": 906,
+		"targets": ["alive,nonself"],
+		"checkalive": "target",
+		"help": "decult [player]: If the target is a cultist, that player will peacefully leave the town."
+	},
+	"convert": {
+		"alias": "decult",
+		"targets": ["alive,nonself"]
+	},
+	"kill": {
+		"priority": 907,
+		"targets": ["alive,nonself"],
+		"type": "kill",
+		"is_kill": true,
+		"checkalive": "target",
+		"help": "kill [player]: Kills another player. A doctor can prevent the kill, and some roles are immune."
+	},
+	"doom": {
+		"priority": 908,
+		"targets": ["alive,nonself"],
+		"type": "kill",
+		"is_kill": true,
+		"checkalive": "target",
+		"status": "doompercent",
+		"help": "doom [player]: Increases a player's doom level. When a player is sufficiently doomed, they die."
+	},
+	"attack": {
+		"priority": 908,
+		"targets": ["alive,nonself"],
+		"type": "kill",
+		"is_kill": true,
+		"checkalive": "target",
+		"status": "weapondamage",
+		"help": "attack [player]: Deals damage to a player. When a player is sufficiently damaged, they die.",
+		"public": true
+	},
+	"nuke": {
+		"priority": 908.5,
+		"targets": ["alive,nonself"],
+		"type": "kill",
+		"is_kill": true,
+		"checkalive": "player,target",
+		"status": "countdown",
+		"help": "nuke [player]: Calls down a nuclear strike which kills the target after a short delay. Also deals damage to all other players."
+	},
+	"mafiakill": {
+		"alias": "kill",
+		"targets": ["alive,nonself"],
+		"is_kill": true,
+		"help": "mafiakill [player]: Kills another player. Only one mafia can use mafiakill each night. A doctor can prevent the kill, and some roles are immune."
+	},
+	"superkill": {
+		"priority": 909,
+		"targets": ["alive,nonself"],
+		"type": "super",
+		"is_kill": true,
+		"checkalive": "target",
+		"help": "superkill [player]: Kills another player, even if they have doctor protection or are immune to kills."
+	},
+	"timebomb": {
+		"priority": 910,
+		"targets": ["alive,nonself"],
+		"type": "kill",
+		"is_kill": true,
+		"checkalive": "target",
+		"help": "timebomb [player]: Kills another player after a short delay."
+	},
+	"reverseprotect": {
+		"priority": 911,
+		"targets": ["alive,nonself"],
+		"is_kill": true,
+		"checkalive": "target",
+		"help": "reverseprotect [player]: Reverses a doctor protection on another player. If that player is protected tonight, they will die instead."
+	},
+	"shoot": {
+		"priority": 912,
+		"targets": ["alive"],
+		"is_kill": true,
+		"help": "shoot [player]: Shoot a player in Ready-Aim-Fire."
+	},
+	"rock": {
+		"priority": 913,
+		"targets": [],
+		"is_kill": true,
+		"help": "rock: Good ol' rock. Nothing beats rock."
+	},
+	"paper": {
+		"priority": 913,
+		"targets": [],
+		"is_kill": true,
+		"help": "paper: Things look good on it."
+	},
+	"scissors": {
+		"priority": 913,
+		"targets": [],
+		"is_kill": true,
+		"help": "scissors: Remember, always run with the pointy end forward."
+	},
+	"ignite": {
+		"priority": 913,
+		"targets": [],
+		"is_kill": true,
+		"help": "ignite: Sets a fire, which kills all primed players."
+	},
+	"apocalypse": {
+		"priority": 914,
+		"targets": [],
+		"is_kill": true,
+		"status": "doompercent",
+		"help": "apocalypse: Players die randomly."
+	},
+	"truthsay": {
+		"priority": 914,
+		"targets": ["alive, nonself"],
+		"checkalive": "target",
+		"help": "truthsay: Prevent players from dieing randomly to doomspeakers or banshees."
+	},
+	"recruit": {
+		"priority": 955,
+		"targets": ["alive,nonself"],
+		"status": "recruit",
+		"checkalive": "player,target",
+		"help": "recruit [player]: Recruits another player into your cult. This ability only affects town-aligned players. If you are killed, the recruited players will die."
+	},
+	"enslave": {
+		"alias": "recruit",
+		"targets": ["alive,nonself"]
+	},
+	"superrecruit": {
+		"priority": 956,
+		"targets": ["alive,nonself"],
+		"status": "recruit",
+		"checkalive": "target",
+		"help": "superrecruit [player]: Recruits another player into your cult. This ability can affect any player. The recruited player does not die when you do."
+	},
+	"mutate": {
+		"priority": 957,
+		"targets": ["alive,nonself"],
+		"status": "mutate",
+		"checkalive": "target",
+		"help": "mutate [player]: Transforms another player into a random role. (The player's team does not change)."
+	},
+	"selfmutate": {
+		"alias": "mutate #S",
+		"targets": [],
+		"type": "nonkill,locked,noimmune",
+		"status": "mutate",
+		"help": "selfmutate: You get a new role at random. You retain this ability."
+	},
+	"infect": {
+		"priority": 958,
+		"targets": ["alive,nonself"],
+		"status": "infect",
+		"checkalive": "target",
+		"is_kill": true,
+		"help": "infect [player]: Infect another player with a fatal disease."
+	},
+	"silentinfect": {
+		"priority": 958,
+		"targets": ["alive,nonself"],
+		"status": "infect",
+		"checkalive": "target",
+		"is_kill": true,
+		"help": "silentinfect [player]: Infect another player with a condition. They do not learn they are infected."
+	},
+	"transformother": {
+		"priority": 959,
+		"targets": ["alive,nonself"],
+		"status": "transform",
+		"checkalive": "target",
+		"help": "transformother [player]: Transform another player to a new role and possibly team."
+	},
+	"evolve": {
+		"priority": 960,
+		"targets": ["alive,nonself"],
+		"checkalive": "target",
+		"help": "evolve [player]: Changes a player's role to a more advanced form. The new role depends on the old role, and replaces the old role's abilities."
+	},
+	"restore": {
+		"priority": 961,
+		"targets": ["alive,nonself"],
+		"checkalive": "target",
+		"help": "restore [player]: Returns a player to their original role. This won't work on cultists."
+	},
+	"resurrect": {
+		"priority": 1001,
+		"targets": ["dead,nonself"],
+		"type": "resurrect",
+		"help": "resurrect [player]: Brings another player back from the dead. You cannot resurrect the same player twice."
+	},
+	"frame": {
+		"priority": 1101,
+		"targets": ["alive,nonself"],
+		"help": "frame [player]: Makes another player show up as mafia to any cop investigations targeting them this night."
+	},
+	"clear": {
+		"priority": 1102,
+		"targets": ["alive,nonself"],
+		"help": "clear [player]: Makes another player show up as town to any cop investigations targeting them this night."
+	},
+	"destroybody": {
+		"priority": 1103,
+		"targets": ["dead,nonself"],
+		"help": "destroybody [player]: Prevents a dead player from being revived or autopsied."
+	},
+	"autopsy": {
+		"priority": 1201,
+		"targets": ["dead,nonself"],
+		"help": "autopsy [player]: Discovers who killed another player."
+	},
+	"watch": {
+		"priority": 1202,
+		"targets": ["alive,nonself"],
+		"status": "track",
+		"help": "watch [player]: Determines whether a player used a night action this night."
+	},
+	"track": {
+		"priority": 1203,
+		"targets": ["alive,nonself"],
+		"status": "track",
+		"help": "track [player]: Determines the target of a player's night action this night, if any."
+	},
+	"patrol": {
+		"priority": 1204,
+		"targets": ["alive,nonself"],
+		"status": "track",
+		"help": "patrol [player]: Tells you who targeted the chosen player this night."
+	},
+	"inspect": {
+		"priority": 1205,
+		"targets": ["alive,nonself"],
+		"status": "sanity",
+		"help": "inspect [player]: Determines some information about another player. Be careful, the information might not be true."
+	},
+	"inspectrole": {
+		"priority": 1206,
+		"targets": ["alive,nonself"],
+		"help": "inspectrole [player]: Determines another player's role name."
+	},
+	"census": {
+		"priority": 1206,
+		"targets": [],
+		"status": "census",
+		"help": "census: Tells you how many players of some types are alive."
+	},
+	"eavesdrop": {
+		"priority": 1207,
+		"targets": ["alive,nonself"],
+		"help": "psi [player]: You recieve copies of all messages the target player recieves this phase."
+	},
+	"none": {
+		"targets": []
+	},
+	"mup": {
+		"alias": "none ? protect #1 ? inspect #1 ? kill #1",
+		"targets": ["alive,nonself"],
+		"is_kill": true,
+		"help": "mup [player]: This has a 25% chance of protecting the target, a 25% chance of investigating, a 25% chance of killing, and a 25% chance of doing nothing."
+	},
+	"hack": {
+		"alias": "block #1 ? block #1 ? block #1 ? redirect #1 #? ? redirect #1 #1 ? redirect #1 #S ? copy #1 #? ? copy #1 #1 ? copy #1 #S",
+		"targets": ["alive,nonself"],
+		"help": "hack [player]: This hacks another player's action, which has an equal chance of blocking it, redirecting it, or copying it."
+	},
+	"mimic": {
+		"alias": "bus #1 #S",
+		"targets": ["alive,nonself"],
+		"help": "mimic [player]: Any actions targeting you affect your target, and vice versa."
+	},
+	"isolate": {
+		"alias": "block #1 \\ protect #1",
+		"targets": ["alive,nonself"],
+		"help": "isolate [player]: This both blocks a player and protects them from kills."
+	},
+	"kill2": {
+		"alias": "kill #1 \\ kill #2",
+		"targets": ["alive,nonself,unique", "alive,nonself,unique"],
+		"type": "kill,multitarget",
+		"is_kill": true,
+		"help": "kill2 [player1] [player2]: Kills two players at the same time. The targets must be different and neither one can be yourself."
+	},
+	"abduct": {
+		"alias": "block #1 \\ makehidden #1",
+		"targets": ["alive,nonself"],
+		"help": "abduct [player]: Abducts a player, both blocking their night action and preventing them from being targeted by other night actions."
+	},
+	"negate": {
+		"alias": "block #1 \\ subvote #1",
+		"targets": ["alive,nonself"],
+		"help": "negate [player]: Blocks a player's action and prevents them from voting the next day."
+	},
+	"reveal": {
+		"alias": "friend #1 \\ inspect #1",
+		"targets": ["alive,nonself"],
+		"help": "reveal [player]: Determines another player's alignment, and reveals your alignment to that player."
+	},
+	"pry": {
+		"alias": "reveal",
+		"targets": ["alive,nonself"]
+	},
+	"dematerialize": {
+		"alias": "hide \\ subvote #S",
+		"targets": [],
+		"help": "dematerialize: You cannot be affected by night actions, but lose your vote the next day."
+	},
+	"reanimate": {
+		"alias": "resurrect \\ recruit",
+		"targets": ["dead,nonself"],
+		"type": "resurrect,linked",
+		"help": "reanimate [player]: Brings another player back from the dead and recruits them into your cult. Only protown players can be recruited. You cannot reanimate the same player twice."
+	},
+	"reincarnate": {
+		"alias": "resurrect \\ mutate",
+		"targets": ["dead,nonself"],
+		"type": "resurrect,linked",
+		"help": "reincarnate [player]: Brings another player back from the dead and gives them a new role at random. You cannot reincarnate the same player twice."
+	},
+	"raise": {
+		"alias": "resurrect #1 \\ suicide",
+		"targets": ["dead,nonself"],
+		"help": "raise [player]: Returns another player from the dead in exchange for your own life. This ability works even if you are killed by someone else the night you use it."
+	},
+	"takevote": {
+		"alias": "subvote #1 \\ addvote #S",
+		"targets": ["alive,nonself"],
+		"type": "nonkill,linked",
+		"checkalive": "target",
+		"help": "takevote [player]: Steals a vote from another player and gives it to you for the next day."
+	},
+	"stealvote": {
+		"alias": "takevote",
+		"targets": ["alive,nonself"],
+		"type": "nonkill,linked"
+	},
+	"absorb": {
+		"alias": "steal #1 \\ kill #1",
+		"targets": ["alive,nonself"],
+		"type": "kill,linked",
+		"is_kill": true,
+		"help": "absorb [player]: Kills another player, and steals one of their abilities."
+	},
+	"consume": {
+		"alias": "absorb",
+		"targets": ["alive,nonself"],
+		"is_kill": true
+	},
+	"replicate": {
+		"alias": "morph #1 \\ kill #1",
+		"targets": ["alive,nonself"],
+		"type": "kill,linked",
+		"is_kill": true,
+		"help": "replicate [player]: Kills another player and turns you into an exact copy of them."
+	},
+	"trick": {
+		"alias": "swap #1 #? \\ kill #1",
+		"targets": ["alive,nonself"],
+		"type": "kill,linked",
+		"is_kill": true,
+		"help": "trick [player]: Switches a player's role with a random player, then kills them.."
+	},
+	"drain": {
+		"alias": "kill #1 \\ giveability #S",
+		"targets": ["alive,nonself"],
+		"type": "kill,linked",
+		"is_kill": true,
+		"checkalive": "target",
+		"help": "drain [player]: Kills another player and gives you a random ability."
+	},
+	"eradicate": {
+		"alias": "disablebase #1 \\ superkill #1 \\ destroybody #1",
+		"targets": ["alive,nonself"],
+		"type": "super,linked",
+		"status": "disabletime",
+		"is_kill": true,
+		"help": "eradicate [player]: Kills another player despite protection, and prevents them from ever returning to life."
+	},
+	"disable": {
+		"alias": "block #1 \\ disablebase #1",
+		"targets": ["alive,nonself"],
+		"resolvedelay": "normal",
+		"status": "disabletime",
+		"help": "disable [player]: Temporarily removes all of a player's abilities and characteristics, and blocks their night action."
+	},
+	"cpr": {
+		"alias": "protect #1 \\ reverseprotect #1",
+		"targets": ["alive,nonself"],
+		"is_kill": true,
+		"help": "cpr [player]: If someone else tries to kill the target, they will survive. Otherwise they will die."
+	},
+	"wail": {
+		"alias": "block #1 \\ doom #1",
+		"targets": ["alive,nonself"],
+		"type": "nonkill",
+		"is_kill": true,
+		"help": "wail [player]: Roleblocks someone and increases their doom level. This can't be stopped by doctor protection."
+	},
+	"exorcise": {
+		"alias": "restore #1 \\ decult #1",
+		"targets": ["alive,nonself"],
+		"type": "nonkill",
+		"help": "exorcise [player]: If the target is a cultist, they will die. Otherwise, they are returned to their original role and team."
+	},
+	"defile": {
+		"alias": "stealdead #1 \\ destroybody #1",
+		"targets": ["dead"],
+		"type": "nonkill,linked",
+		"help": "defile [player]: Destroys a dead player's corpse and gives you one of their abilities."
+	},
+	"exchange": {
+		"alias": "swap #1 #S",
+		"targets": ["alive,nonself"],
+		"help": "exchange [player]: Exchanges your role with another player. The swap is permanent."
+	},
+	"attract": {
+		"alias": "redirect #1 #S",
+		"targets": ["alive,nonself"],
+		"help": "attract [player]: Changes the target of another player's night action to yourself."
+	},
+	"salvage": {
+		"alias": "giveability #S",
+		"targets": [],
+		"help": "salvage: Gives you a random one-shot night ability."
+	},
+	"karma": {
+		"alias": "copy #1 #1",
+		"targets": ["alive,nonself"],
+		"help": "karma [player]: Copies another player's night action to themself."
+	},
+	"halfkarma": {
+		"alias": "copy #1 #1 ? none",
+		"targets": ["alive,nonself"]
+	},
+	"randomizeall": {
+		"alias": "randomize #*",
+		"targets": [],
+		"type": "nonkill,multitarget,notrigger",
+		"help": "randomizeall: All night actions tonight will affect random targets."
+	},
+	"blockall": {
+		"alias": "block #*",
+		"targets": [],
+		"type": "nonkill,multitarget,notrigger",
+		"help": "blockall: All night actions tonight will be prevented."
+	},
+	"giftall": {
+		"alias": "giveability #*",
+		"targets": [],
+		"type": "nonkill,multitarget",
+		"help": "giftall: Each other player recieves a random ability."
+	},
+	"sacrifice": {
+		"alias": "superprotect #* \\ suicide",
+		"targets": [],
+		"type": "super,notrigger",
+		"help": "sacrifice: You die, but all other kills tonight are prevented. Other night actions are unaffected."
+	},
+	"irradiate": {
+		"alias": "mutate #*",
+		"targets": [],
+		"type": "super,notrigger",
+		"help": "irradiate: All other players recieve new roles at random."
+	},
+	"randomkill": {
+		"alias": "kill #?",
+		"targets": [],
+		"is_kill": true,
+		"help": "randomkill: Kills a random player."
+	},
+	"shuffle": {
+		"alias": "swap #? #?",
+		"targets": [],
+		"help": "shuffle: Exchanges two random players' roles."
+	},
+	"cheat": {
+		"alias": "inspect #?",
+		"targets": []
+	},
+	"shadow": {
+		"alias": "clear #S \\ protect #S",
+		"targets": [],
+		"help": "shadow: You show up as town to any cop investigations, and you can't be killed unless two players try to kill you the same phase. (You can still be lynched)."
+	},
+	"killresist": {
+		"alias": "protect #S",
+		"targets": [],
+		"help": "killresist: You can't be killed unless two players try to kill you the same phase. (You can still be lynched)."
+	},
+	"extravote": {
+		"alias": "addvote #S",
+		"targets": [],
+		"help": "extravote: You recieve an extra vote each day."
+	},
+	"mystery": {
+		"alias": "none",
+		"targets": ["alive,nonself"],
+		"is_kill": true,
+		"help": "mystery [player]: You don't know what this does."
+	},
+	"special": {
+		"alias": "none",
+		"targets": ["alive,nonself"],
+		"is_kill": true,
+		"help": "special [player]: This does something depending on your role."
+	}
+}
