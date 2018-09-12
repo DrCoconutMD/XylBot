@@ -2,6 +2,7 @@ const discord = require('discord.js');
 const logger = require('winston');
 const auth = require('./auth.json');
 
+const core = require('./core/core');
 const dice = require('./dice/dice');
 const silly = require('./silly/silly');
 
@@ -41,6 +42,12 @@ mafbot.on('message', async message => {
 				args[0] = user.username;
 			}
 			sendMessage(channel, silly.slap(args));
+			break;
+		case 'mute':
+			core.mute(channel);
+			break;
+		case 'unmute':
+			core.unmute(channel);
 			break;
 	}
 });

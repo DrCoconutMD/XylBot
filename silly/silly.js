@@ -1,4 +1,4 @@
-module.exports.slap = (args) => {
+module.exports.slap = args => {
     let arg = args[0];
     if (!arg) {
         arg = `himself`;
