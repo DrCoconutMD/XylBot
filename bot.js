@@ -22,9 +22,6 @@ mafbot.on('message', async message => {
 	const channel = message.channel;
 	const content = message.content;
 	const user = message.author;
-	if (channel.id !== '487080224320782336') {
-		return;
-	}
 	if (content.substring(0,1) !== '!') {
 		return;
 	}
