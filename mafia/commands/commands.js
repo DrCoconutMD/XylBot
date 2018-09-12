@@ -58,4 +58,8 @@ module.exports.playerIn = (user, channel) => {
 const beginGame = channel => {
     channel.send(`The game is afoot!`);
     channel.send(`Players: ${players.map(player => player.username).join(', ')}`);
+    const role = channel.guild.roles.find(role => role.name === config.player_role);
+    players.forEach(player => {
+        channel.guild.member(player).addRole(role);
+    });
 };
