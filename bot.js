@@ -3,6 +3,7 @@ const logger = require('winston');
 const auth = require('./auth.json');
 
 const core = require('./core/core');
+const mafia = require('./mafia/commands/commands');
 const dice = require('./dice/dice');
 const silly = require('./silly/silly');
 
@@ -48,6 +49,12 @@ mafbot.on('message', async message => {
 			break;
 		case 'unmute':
 			core.unmute(channel);
+			break;
+		case 'start':
+			mafia.startGame(channel);
+			break;
+		case 'in':
+			mafia.playerIn(user, channel);
 			break;
 	}
 });
