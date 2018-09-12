@@ -53,6 +53,9 @@ mafbot.on('message', async message => {
 		case 'in':
 			mafia.playerIn(user, channel);
 			break;
+		case 'abort':
+			mafia.abortGame(channel);
+			break;
 	}
 });
 
