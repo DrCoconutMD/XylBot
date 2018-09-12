@@ -56,6 +56,9 @@ mafbot.on('message', async message => {
 		case 'abort':
 			mafia.abortGame(channel);
 			break;
+		case 'force-start':
+			mafia.beginGame(channel);
+			break;
 	}
 });
 

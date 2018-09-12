@@ -4,7 +4,7 @@ const core = require('../../core/core');
 const Statuses = [ {NONE: ''}, {SIGNUPS: 'signups'}, {PROGRESS: 'in progress'} ];
 let gameStatus = Statuses.NONE;
 let minplayers, maxplayers, currentSetup, playerrole;
-const players = [];
+let players = [];
 
 module.exports.startGame = async channel => {
     if (gameStatus !== Statuses.NONE) {
@@ -73,7 +73,7 @@ module.exports.beginGame = channel => {
 module.exports.abortGame = channel => {
     channel.send(`Aborting game. :(`);
     players.forEach(player => {
-        channel.guild.member(player).removeRole(role);
+        channel.guild.member(player).removeRole(playerrole);
     });
     players = [];
     gameStatus = Statuses.NONE;
