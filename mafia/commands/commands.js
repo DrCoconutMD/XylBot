@@ -39,7 +39,7 @@ module.exports.startGame = async channel => {
     exports.beginGame(channel);
 };
 
-module.exports.playerIn = (user, channel) => {
+module.exports.playerIn = (channel, user) => {
     if (gameStatus !== Statuses.SIGNUPS) {
         channel.send(`Signups are not in progress, ${user.username}.`);
         return;
