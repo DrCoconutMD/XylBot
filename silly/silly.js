@@ -46,3 +46,15 @@ const creatures = [
     'cicada',
     'ocelot'
 ];
+
+module.exports.kiss = (channel, user, args) => {
+    let arg = args[0];
+
+    if (!arg) {
+        arg = `himself`;
+    } else if ((arg.includes('everyone') || arg.includes('here'))) {
+        arg = user.displayName;
+    }
+
+    channel.send(`\:kiss: Gives ${arg} a sloppy wet kiss!`);
+};
