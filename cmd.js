@@ -27,6 +27,8 @@ module.exports.getCommand = cmd => {
             return commandObject(mafia.abortGame, permissions.isHop);
         case 'force-start':
             return commandObject(mafia.beginGame, permissions.isAny);
+	case 'Kiss':
+            return commandObject(silly.kiss, permissions.isAny);
 	}
 };
 
