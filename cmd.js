@@ -8,22 +8,26 @@ const silly = require('./silly/silly');
 module.exports.getCommand = cmd => {
     switch(cmd) {
         case 'ping':
-            return { execute: core.ping, hasPermission: permissions.isOp };
+            return commandObject(core.ping, permissions.isOp);
         case 'roll':
-            return { execute: dice.roll, hasPermission: permissions.isAny };
+            return commandObject(dice.roll, permissions.isAny);
         case 'slap':
-            return { execute: silly.slap, hasPermission: permissions.isAny };
+            return commandObject(silly.slap, permissions.isAny);
         case 'mute':
-            return { execute: core.mute, hasPermission: permissions.isHop };
+            return commandObject(core.mute, permissions.isHop);
         case 'unmute':
-            return { execute: core.unmute, hasPermission: permissions.isHop };
+            return commandObject(core.unmute, permissions.isHop);
         case 'start':
-            return { execute: mafia.startGame, hasPermission: permissions.isAny };
+            return commandObject(mafia.startGame, permissions.isAny);
         case 'in':
-            return { execute: mafia.playerIn, hasPermission: permissions.isAny };
+            return commandObject(mafia.playerIn, permissions.isAny);
         case 'abort':
-            return { execute: mafia.abortGame, hasPermission: permissions.isHop };
+            return commandObject(mafia.abortGame, permissions.isHop);
         case 'force-start':
-            return { execute: mafia.beginGame, hasPermission: permissions.isAny };
+            return commandObject(mafia.beginGame, permissions.isAny);
 	}
 };
+
+const commandObject = (func, auth) => {
+    return { execute: func, hasPermission: auth };
+}
