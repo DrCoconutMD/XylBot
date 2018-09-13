@@ -28,25 +28,18 @@ mafbot.on('message', async message => {
 	}
 
 	const channel = message.channel;
-	const author = message.author;
-	const user = channel.guild.member(author);
+	const user = message.member;
 
 	var args = content.substring(1).split(' ');
 	const command = cmd.getCommand(args.shift());
 
-	if (command.hasPermission(user)) {
+	if (!command) {
+		channel.send(`${user.displayName}, that is not a valid command. Shame on you.`);
+	} else if (command.hasPermission(user)) {
 		command.execute(channel, user, args);
 	} else {
-		channel.send(`Sorry ${user.username}, you don't have permission to use that command.`);
+		channel.send(`Sorry ${user.displayName}, you don't have permission to use that command.`);
 	}
-	// switch(cmd) {
-	// 	case 'slap':
-	// 		if (args[0] && (args[0].includes('everyone') || args[0].includes('here'))) {
-	// 			args[0] = user.username;
-	// 		}
-	// 		sendMessage(channel, silly.slap(args));
-	// 		break;
-	// }
 });
 
 mafbot.login(auth.token);

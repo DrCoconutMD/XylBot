@@ -4,7 +4,7 @@ module.exports.slap = (channel, user, args) => {
     if (!arg) {
         arg = `himself`;
     } else if ((arg.includes('everyone') || arg.includes('here'))) {
-        arg = user.username;
+        arg = user.displayName;
     }
 
     const weight = Math.floor(Math.random() * 1000 + 1);

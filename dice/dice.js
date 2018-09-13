@@ -3,7 +3,7 @@ module.exports.roll = (channel, user, args) => {
         args.push(`1d6`);
     }
     const rolledDice = [];
-    
+
     while (args.length > 0) {
         const dice = deduceDice(args.shift());
 
@@ -16,7 +16,7 @@ module.exports.roll = (channel, user, args) => {
     }
     const total = rolledDice.reduce((a, b) => a + b, 0);
 
-    channel.send(`Hey ${user.username}, You rolled a ${total} (${rolledDice.join(', ')}).`);
+    channel.send(`Hey ${user.displayName}, You rolled a ${total} (${rolledDice.join(', ')}).`);
 };
 
 const deduceDice = dice => {

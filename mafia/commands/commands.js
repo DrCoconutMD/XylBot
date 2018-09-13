@@ -1,7 +1,7 @@
 const config = require('../libs/config.json');
 const core = require('../../core/core');
 
-const Statuses = [ {NONE: ''}, {SIGNUPS: 'signups'}, {PROGRESS: 'in progress'} ];
+const Statuses = {NONE: '', SIGNUPS: 'signups', PROGRESS: 'in progress'};
 let gameStatus = Statuses.NONE;
 let minplayers, maxplayers, currentSetup, playerrole;
 let players = [];
@@ -41,39 +41,54 @@ module.exports.startGame = async channel => {
 
 module.exports.playerIn = (channel, user) => {
     if (gameStatus !== Statuses.SIGNUPS) {
-        channel.send(`Signups are not in progress, ${user.username}.`);
+        channel.send(`Signups are not in progress, ${user.displayName}.`);
         return;
     }
     if (players.includes(user)) {
-        channel.send(`You are already signed up, ${user.username}.`);
+        channel.send(`You are already signed up, ${user.displayName}.`);
         return;
     }
     const BANNED_NAMES = ['none', 'nolynch', 'self', 'sky', 'unknown'];
-    if (BANNED_NAMES.includes(user.username)) {
-        channel.send(`You cannot join a game with that nick, ${user.username}.`);
+    if (BANNED_NAMES.includes(user.displayName)) {
+        channel.send(`You cannot join a game with that nick, ${user.displayName}.`);
         return;
     }
     if (players.length >= maxplayers) {
-        channel.send(`Sorry ${user.username}, the game is full!`);
+        channel.send(`Sorry ${user.displayName}, the game is full!`);
         return;
     }
 
     players.push(user);
-    channel.guild.member(user).addRole(playerrole);
-    channel.send(`You are now signed up for the next game, ${user.username}.`);
+    user.addRole(playerrole);
+    channel.send(`You are now signed up for the next game, ${user.displayName}.`);
+};
+
+module.exports.playerOut = (channel, user) => {
+    if (gameStatus !== Statuses.SIGNUPS) {
+        channel.send(`Signups are not in progress, ${user.displayName}.`);
+        return;
+    }
+    if (!players.includes(user)) {
+        channel.send(`You are not signed up, ${user.displayName}.`);
+        return;
+    }
+
+    players.splice(players.indexOf(user), 1);
+    user.removeRole(playerrole);
+    channel.send(`You are no longer signed up for the next game, ${user.displayName}.`);
 };
 
 module.exports.beginGame = channel => {
     gameStatus = Statuses.PROGRESS;
     channel.send(`The game is afoot!`);
-    channel.send(`Players: ${players.map(player => player.username).join(', ')}`);
+    channel.send(`Players: ${players.map(player => player.displayName).join(', ')}`);
     core.mute(channel);
 };
 
 module.exports.abortGame = channel => {
     channel.send(`Aborting game. :(`);
     players.forEach(player => {
-        channel.guild.member(player).removeRole(playerrole);
+        player.removeRole(playerrole);
     });
     players = [];
     gameStatus = Statuses.NONE;

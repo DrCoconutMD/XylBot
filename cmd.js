@@ -21,6 +21,8 @@ module.exports.getCommand = cmd => {
             return commandObject(mafia.startGame, permissions.isAny);
         case 'in':
             return commandObject(mafia.playerIn, permissions.isAny);
+        case 'out':
+            return commandObject(mafia.playerOut, permissions.isAny);
         case 'abort':
             return commandObject(mafia.abortGame, permissions.isHop);
         case 'force-start':

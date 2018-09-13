@@ -7,7 +7,7 @@ module.exports.isOp = user => {
 };
 
 module.exports.isHop = user => {
-    return user.roles.some(role => role.name.contains(OP_ROLE));
+    return user.roles.some(role => role.name.includes(OP_ROLE));
 };
 
 module.exports.isPlayer = user => {
