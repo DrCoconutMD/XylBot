@@ -1,3 +1,7 @@
+module.exports.ping = channel => {
+    channel.send(`PONGOGONG`);
+};
+
 module.exports.mute = channel => {
     channel.overwritePermissions(channel.guild.defaultRole, { SEND_MESSAGES: false });
 };
