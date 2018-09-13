@@ -1,14 +1,17 @@
-module.exports.slap = args => {
+module.exports.slap = (channel, user, args) => {
     let arg = args[0];
+
     if (!arg) {
         arg = `himself`;
+    } else if ((arg.includes('everyone') || arg.includes('here'))) {
+        arg = user.username;
     }
 
     const weight = Math.floor(Math.random() * 1000 + 1);
     const animalIndex = Math.floor(Math.random() * creatures.length);
     const animal = creatures[animalIndex];
 
-    return `\:hand_splayed: slaps ${arg} with a ${weight}lb ${animal}!`;
+    channel.send(`\:hand_splayed: slaps ${arg} with a ${weight}lb ${animal}!`);
 };
 
 const creatures = [
